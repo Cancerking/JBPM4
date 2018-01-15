@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process name="TurnCardEntryAudit" xmlns="http://jbpm.org/4.4/jpdl">
+   <start g="419,2,48,88" name="start">
+      <transition g="-131,-22" name="to DataEntryPersonne" to="DataEntryPersonne"/>
+   </start>
+   <task assignee="zhangsan" g="357,110,170,54" name="DataEntryPersonne">
+      <transition g="-52,-22" name="to fork1" to="fork1"/>
+   </task>
+   <task assignee="lisi" g="168,360,183,63" name="BusinessManagerReview">
+      <transition g="-49,-22" name="to join1" to="join1"/>
+   </task>
+   <task assignee="wangwu" g="363,600,180,58" name="DistrictManagerReview">
+      <transition g="-43,-22" name="to End" to="End">
+         <event-listener class="com.zhf.jbpm4.event.JbpmEventListener"/>
+      </transition>
+   </task>
+   <end g="436,715,48,48" name="End"/>
+   <task assignee="zhaoliu" g="588,381,146,48" name="ProjectAudit">
+      <transition g="-49,-22" name="to join1" to="join1"/>
+   </task>
+   <fork g="420,250,48,48" name="fork1">
+      <transition g="-12,-19" name="to ProjectAudit" to="ProjectAudit"/>
+      <transition g="-164,-22" name="to BusinessManagerReview" to="BusinessManagerReview"/>
+   </fork>
+   <join g="421,486,48,48" name="join1">
+      <transition g="-154,-22" name="to DistrictManagerReview" to="DistrictManagerReview"/>
+   </join>
+</process>
